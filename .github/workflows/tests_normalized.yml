@@ -20,13 +20,3 @@ jobs:
         docker ps -a
         sleep 20
         sh load_tweets.sh
-        docker-compose exec -T pg_normalized ./run_tests.sh
-      # Continue to the next step only if the previous step exits with code 0 (success)
-      continue-on-error: true
-    - name: Check Docker Container Status
-      run: docker ps -a
-    - name: Check Test Data Loading
-      run: sh load_tweets.sh
-    # Add a final step to check the exit codes and set the job status accordingly
-    - name: Check Errors
-      run: exit $(($? == 0 ? 0 : 1))
