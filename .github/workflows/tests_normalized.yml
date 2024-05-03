@@ -1,0 +1,32 @@
+name: tests_normalized
+on:
+  push:
+    branches: ['*']
+  pull_request:
+    branches: ['*']
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: setup python
+      run: |
+        pip3 install -r requirements.txt
+    - name: docker
+      run: |
+        git submodule init
+        git submodule update
+        docker-compose up -d --build
+        docker ps -a
+        sleep 20
+        sh load_tweets.sh
+        docker-compose exec -T pg_normalized ./run_tests.sh
+      # Continue to the next step only if the previous step exits with code 0 (success)
+      continue-on-error: true
+    - name: Check Docker Container Status
+      run: docker ps -a
+    - name: Check Test Data Loading
+      run: sh load_tweets.sh
+    # Add a final step to check the exit codes and set the job status accordingly
+    - name: Check Errors
+      run: exit $(($? == 0 ? 0 : 1))

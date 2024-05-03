@@ -1,4 +1,5 @@
 # flask-on-docker
+[![](https://github.com/ains-arch/database-website/workflows/tests_normalized/badge.svg)](https://github.com/ains-arch/database-website/actions?query=workflow%3Atests)
 
 ## Overview
 
