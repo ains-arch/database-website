@@ -14,9 +14,10 @@ services:
     env_file:
       - ./.env.prod
     depends_on:
-      - db
-  db:
-    build: services/db
+      - postgres
+
+  postgres:
+    build: ./services/postgres
     volumes:
       - ./:/tmp/db
       - postgres_data_prod:/var/lib/postgresql/data/
@@ -24,6 +25,7 @@ services:
       - ./.env.prod.db
     ports:
       - 1467:5432
+
   nginx:
     build: ./services/nginx
     volumes:
