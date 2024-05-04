@@ -9,7 +9,6 @@ test-data.zip
 
 echo 'load normalized dev'
 for file in $files; do
-    python3 load_tweets.py --db "postgresql://postgres:pass@localhost:1361" --inputs $file
-    # call the load_tweets.py file to load data into pg_normalized
+    python3 -u load_tweets_batch.py --db "postgresql://hello_flask:hello_flask@localhost:1457/hello_flask_dev" --inputs $file
 echo 'load normalized dev complete'
 done
