@@ -19,4 +19,8 @@ jobs:
         docker-compose up -d --build
         docker ps -a
         sleep 20
-        sh load_tweets.sh
+        sh load_tweets_prod.sh
+        docker-compose -f docker-compose.prod.yml up -d --build
+        docker ps -a
+        sleep 20
+        sh load_tweets_dev.sh
