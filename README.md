@@ -27,6 +27,11 @@ Add the data
 $ sh load_tweets_dev.sh
 ```
 
+Look at the database (password is also hello\_flask)
+```
+docker-compose exec postgres psql -U hello_flask -W hello_flask_dev
+```
+
 ### Production
 
 1. Create a *.env.prod* file in the root folder of the project. Choose a username and password.
