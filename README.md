@@ -1,5 +1,5 @@
 # flask-on-docker
-[![](https://github.com/ains-arch/database-website/workflows/tests_normalized/badge.svg)](https://github.com/ains-arch/database-website/actions?query=workflow%3Atests)
+[![](https://github.com/ains-arch/database-website/workflows/tests_dev/badge.svg)](https://github.com/ains-arch/database-website/actions?query=workflow%3Atests)
 
 ## Overview
 
@@ -9,19 +9,23 @@ to run on Docker with Postgres.
 The production environmental also includes Nginx and Gunicorn,
 and supports serving both static and user-uploaded media files via Nginx. 
 
-<img width=100% src=upload.gif alt="gif of an image being uploaded through the web service"/>
-
 ## Build Instructions
 
 ### Development
 
-Build the images and run the containers:
+Build the database and run the containers:
 
 ```sh
 $ docker-compose up -d --build
 ```
 
 Test it out at [http://localhost:1361](http://localhost:1361).
+
+Add the data
+
+```
+$ sh load_tweets_dev.sh
+```
 
 ### Production
 
@@ -52,3 +56,9 @@ $ docker-compose -f docker-compose.prod.yml up -d --build
 ```
 
 Test it out at [http://localhost:1447](http://localhost:1447)!
+
+Add the data
+
+```
+$ sh load_tweets_prod.sh
+```
