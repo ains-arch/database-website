@@ -8,6 +8,7 @@ from flask import (
 )
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
+import sqlalchemy
 
 app = Flask(__name__)
 app.config.from_object("project.config.Config")
@@ -53,3 +54,8 @@ def upload_file():
       <p><input type=file name=file><input type=submit value=Upload>
     </form>
     """
+
+engine = sqlalchemy.create_engine("postgresql://hello_flask:hello_flask@postgres:5432/hello_flask_dev", connect_args={
+    'application_name': '__init__.py',
+    })
+connection = engine.connect()
